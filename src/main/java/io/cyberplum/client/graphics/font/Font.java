@@ -13,7 +13,18 @@ import java.util.Map;
 public class Font {
     
     public static final char[] CHARACTERS = {
-        'A', 'B'
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            
+        ' ', '_', '-', '+', '=',
+            
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+    };
+    
+    public static final char[] LOWERCASE_CHARACTERS = {
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     };
     
     private Map<Character, GameImage> images;
@@ -25,17 +36,36 @@ public class Font {
         }
         
         images = new HashMap<>();
-        
-        for(int i = 0; i < CHARACTERS.length; i++) {
-            File file = new File("assets/font/" + name + "/" + CHARACTERS[i] + ".png");
-            if(!file.exists()) {
-                throw new FileNotFoundException("Could not find image file for character " + CHARACTERS[i] + " in font " + name);
-            }
     
+        for(char c : CHARACTERS) {
+            String fileName = String.valueOf(c);
+            
+            for(char cc : LOWERCASE_CHARACTERS) {
+                if(cc == c) {
+                    fileName = "lowercase_" + c;
+                    break;
+                }
+            }
+        
+            File file = new File("assets/font/" + name + "/" + fileName + ".png");
+            if(!file.exists()) {
+                throw new FileNotFoundException("Could not find image file for character " + c + " in font " + name);
+            }
+        
             BufferedImage bufferedImage = ImageIO.read(file);
             GameImage img = new GameImage(bufferedImage);
-            images.put(CHARACTERS[i], img);
+            images.put(c, img);
         }
+    }
+    
+    public boolean isLowerCase(char c) {
+        for(char cc : LOWERCASE_CHARACTERS) {
+            if(cc == c) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     public GameImage get(char c) {

@@ -7,7 +7,9 @@ public class Color {
     
     public static final int[]
             BLACK_RGB = new int[] { 0, 0, 0 },
-            BLACK_RGBA = new int[] { 0, 0, 0, 255 };
+            BLACK_RGBA = new int[] { 0, 0, 0, 255 },
+            WHITE_RGB = new int[] { 255, 255, 255 },
+            WHITE_RGBA = new int[] { 255, 255, 255, 255 };
     
     public static int[] rgb(int r, int g, int b) {
         return new int[] { r, g, b };

@@ -1,6 +1,5 @@
 package io.cyberplum.client.graphics;
 
-import io.cyberplum.client.Client;
 import io.cyberplum.client.graphics.font.Font;
 
 public class DrawingArea {
@@ -15,6 +14,12 @@ public class DrawingArea {
         this.width = width;
         this.height = height;
         canvas = new GameImage(width, height);
+        
+        reset();
+    }
+    
+    public void reset() {
+        drawRect(0, 0, width, height, Color.BLACK_RGB);
     }
     
     public void drawString(int drawX, int drawY, Font font, String s, int[] color) {
@@ -47,7 +52,7 @@ public class DrawingArea {
                 }
             }
             
-            drawX += width + 1;
+            drawX += width;
         }
     }
     
